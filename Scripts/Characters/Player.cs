@@ -2,20 +2,27 @@ using Godot;
 
 public partial class Player : CharacterBody2D
 {
-    private float _gravity = 1500;
-    private float _runSpeed = 100;
-    private float _jumpSpeed = -300;
+    private float gravity = 1500;
+    private float runSpeed = 100;
+    private float jumpSpeed = -300;
     private bool right;
     private bool left;
-    private AnimationPlayer AnimationPlayer;
-    private Sprite2D Sprite;
+    private AnimationPlayer animationPlayer;
+    private Sprite2D sprite;
+    private AudioStreamPlayer walkAudio;
+    private AudioStreamPlayer jumpAudio;
+
+    public bool HasChestKey { get; private set; }
+    public bool HasDoorKey { get; private set; }
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        Sprite = GetNode<Sprite2D>("Sprite");
-        AnimationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-        AnimationPlayer.Play("Idle");
+        sprite = GetNode<Sprite2D>("Sprite");
+        walkAudio = GetNode<AudioStreamPlayer>("Walk");
+        jumpAudio = GetNode<AudioStreamPlayer>("Jump");
+        animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        animationPlayer.Play("Idle");
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -23,24 +30,24 @@ public partial class Player : CharacterBody2D
     {
         if (right)
         {
-            Sprite.FlipH = false;
-            AnimationPlayer.Play("Walk");
+            sprite.FlipH = false;
+            animationPlayer.Play("Walk");
         }
         else if (left)
         {
-            Sprite.FlipH = true;
-            AnimationPlayer.Play("Walk");
+            sprite.FlipH = true;
+            animationPlayer.Play("Walk");
         }
         else
         {
-            AnimationPlayer.Play("Idle");
+            animationPlayer.Play("Idle");
         }
     }
 
     public override void _PhysicsProcess(double delta)
     {
         var velocity = Velocity;
-        velocity.Y += _gravity * (float)delta;
+        velocity.Y += gravity * (float)delta;
 
         Velocity = velocity;
         GetInput();
@@ -55,15 +62,34 @@ public partial class Player : CharacterBody2D
 
         right = Input.IsActionPressed("Right");
         left = Input.IsActionPressed("Left");
-        var jump = Input.IsActionPressed("Jump");
+        var jump = Input.IsActionJustPressed("Jump");
 
         if (IsOnFloor() && jump)
-            velocity.Y = _jumpSpeed;
+        {
+            velocity.Y = jumpSpeed;
+            jumpAudio.Play(0.15f);
+        }
+
+        if ((right || left) && !walkAudio.Playing)
+            walkAudio.Play();
+        else if (!right && !left)
+            walkAudio.Stop();
+
         if (right)
-            velocity.X += _runSpeed;
+            velocity.X += runSpeed;
         if (left)
-            velocity.X -= _runSpeed;
+            velocity.X -= runSpeed;
 
         Velocity = velocity;
+    }
+
+    public void PickupChestKey()
+    {
+        HasChestKey = true;
+    }
+
+    public void PickupDoorKey()
+    {
+        HasDoorKey = true;
     }
 }

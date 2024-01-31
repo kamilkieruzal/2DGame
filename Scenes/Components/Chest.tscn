@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6auqgjrwxvpx"]
+
+[ext_resource type="Texture2D" uid="uid://dam6i2uwxuokp" path="res://Sprites/Dungeon Tile Set.png" id="1_6oukn"]
+[ext_resource type="Script" path="res://Scripts/Components/Chest.cs" id="1_7l7yo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2stf2"]
+size = Vector2(16, 17)
+
+[node name="Chest" type="Area2D"]
+script = ExtResource("1_7l7yo")
+
+[node name="Closed" type="Sprite2D" parent="."]
+texture = ExtResource("1_6oukn")
+region_enabled = true
+region_rect = Rect2(192, 144, 16, 16)
+
+[node name="Opened" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("1_6oukn")
+region_enabled = true
+region_rect = Rect2(208, 144, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_2stf2")
