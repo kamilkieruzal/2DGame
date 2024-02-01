@@ -1,12 +1,13 @@
 using Godot;
 
+//Write 1 script for all levels and create resources to just modify TileMap of next levels
 public partial class Level1 : Node2D
 {
     private Timer timer;
     private AnimationPlayer animationPlayer;
     private ColorRect textLabel;
     private Chest chest;
-    private Doors doors;
+    private Door door;
     private Key key;
     private Player player;
 
@@ -18,7 +19,7 @@ public partial class Level1 : Node2D
         animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         textLabel = GetNode<ColorRect>("ColorRect");
         chest = GetNode<Chest>("Chest");
-        doors = GetNode<Doors>("Doors");
+        door = GetNode<Door>("Door");
         key = GetNode<Key>("Key");
         player = GetNode<Player>("Player");
     }
@@ -36,6 +37,7 @@ public partial class Level1 : Node2D
         {
             key.Pickup();
             player.PickupChestKey();
+            animationPlayer.Play("PickupChestKey");
         }
     }
 
@@ -45,14 +47,15 @@ public partial class Level1 : Node2D
         {
             chest.Open();
             player.PickupDoorKey();
+            animationPlayer.Play("PickupDoorKey");
         }
     }
 
-    private void OnBodyEnteredDoors(Node2D body)
+    private void OnBodyEnteredDoor(Node2D body)
     {
         if (body is Player player && player.HasDoorKey)
         {
-            doors.Open();
+            door.Open();
             player.PickupDoorKey();
         }
     }

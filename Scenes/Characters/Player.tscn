@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://pxc5sepb5c2s" path="res://Sprites/Monster/Idle/Spr_Idle.png" id="1_lr7vs"]
 [ext_resource type="Texture2D" uid="uid://c84r7nk5ajth3" path="res://Sprites/Monster/Walk/Spr_Walk.png" id="3_w5l2e"]
 [ext_resource type="AudioStream" uid="uid://c6g8vpdwap0qd" path="res://Sounds/jump.wav" id="4_3fefc"]
-[ext_resource type="AudioStream" uid="uid://vqo7sjow002p" path="res://Sounds/walk.wav" id="5_ia132"]
+[ext_resource type="AudioStream" uid="uid://d3n0if4y26uvf" path="res://Sounds/walk.wav" id="5_ia132"]
 
 [sub_resource type="Animation" id="Animation_o24ui"]
 resource_name = "Idle"
@@ -170,6 +170,7 @@ stream = ExtResource("4_3fefc")
 
 [node name="Walk" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_ia132")
+volume_db = -10.196
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(1.28, 0.72)
