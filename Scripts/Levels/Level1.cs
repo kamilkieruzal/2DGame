@@ -10,6 +10,7 @@ public partial class Level1 : Node2D
     private Door door;
     private Key key;
     private Player player;
+    private bool finishedLevel;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -53,10 +54,12 @@ public partial class Level1 : Node2D
 
     private void OnBodyEnteredDoor(Node2D body)
     {
-        if (body is Player player && player.HasDoorKey)
+        if (body is Player player && player.HasDoorKey && !finishedLevel)
         {
+            finishedLevel = true;
             door.Open();
             player.PickupDoorKey();
+            animationPlayer.Play("OpenedDoor");
         }
     }
 }
