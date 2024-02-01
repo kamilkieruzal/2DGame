@@ -18,13 +18,17 @@ public partial class Door : Area2D
     public void Open()
     {
         audioStreamPlayer.Play();
-        GetNode<Sprite2D>("Opened").Show();
-        GetNode<Sprite2D>("Closed").Hide();
     }
 
     public void Close()
     {
         GetNode<Sprite2D>("Opened").Hide();
         GetNode<Sprite2D>("Closed").Show();
+    }
+
+    private void OnDoorOpened()
+    {
+        GetNode<Sprite2D>("Opened").Show();
+        GetNode<Sprite2D>("Closed").Hide();
     }
 }

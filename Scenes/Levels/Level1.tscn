@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://mnpo1skpfsrk"]
+[gd_scene load_steps=23 format=3 uid="uid://mnpo1skpfsrk"]
 
 [ext_resource type="Texture2D" uid="uid://dam6i2uwxuokp" path="res://Sprites/Dungeon Tile Set.png" id="1_rwebk"]
 [ext_resource type="Script" path="res://Scripts/Levels/Level1.cs" id="1_uoq6o"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://b8u6pkos2bvqq" path="res://Scenes/Components/Door.tscn" id="5_kybu7"]
 [ext_resource type="PackedScene" uid="uid://blyrj0lwmmhu6" path="res://Scenes/Components/Key.tscn" id="6_h3p7w"]
 [ext_resource type="AudioStream" uid="uid://drm7ly7lfqa0f" path="res://Sounds/level1.wav" id="7_vebhn"]
+[ext_resource type="AudioStream" uid="uid://dm2t4ovecvk2f" path="res://Sounds/finish.wav" id="8_66c5p"]
+[ext_resource type="PackedScene" uid="uid://dc85f0kgxtv5r" path="res://Scenes/Components/Box.tscn" id="9_5we3t"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k2g07"]
 texture = ExtResource("1_rwebk")
@@ -498,21 +500,25 @@ texture = ExtResource("1_rwebk")
 5:11/0/physics_layer_1/linear_velocity = Vector2(0, 0)
 5:11/0/physics_layer_1/angular_velocity = 0.0
 7:11/0 = 0
+7:11/0/z_index = 20
 7:11/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 7:11/0/physics_layer_0/angular_velocity = 0.0
 7:11/0/physics_layer_1/linear_velocity = Vector2(0, 0)
 7:11/0/physics_layer_1/angular_velocity = 0.0
 8:11/0 = 0
+8:11/0/z_index = 20
 8:11/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 8:11/0/physics_layer_0/angular_velocity = 0.0
 8:11/0/physics_layer_1/linear_velocity = Vector2(0, 0)
 8:11/0/physics_layer_1/angular_velocity = 0.0
 9:11/0 = 0
+9:11/0/z_index = 20
 9:11/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 9:11/0/physics_layer_0/angular_velocity = 0.0
 9:11/0/physics_layer_1/linear_velocity = Vector2(0, 0)
 9:11/0/physics_layer_1/angular_velocity = 0.0
 10:11/0 = 0
+10:11/0/z_index = 20
 10:11/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 10:11/0/physics_layer_0/angular_velocity = 0.0
 10:11/0/physics_layer_1/linear_velocity = Vector2(0, 0)
@@ -743,7 +749,7 @@ fill_to = Vector2(0, 0.0299145)
 
 [sub_resource type="Animation" id="Animation_l7nim"]
 resource_name = "OpenedDoor"
-length = 3.5
+length = 4.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -751,10 +757,10 @@ tracks/0/path = NodePath(".:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 3, 3.5),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 4.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, 4.3703, 5.88001]
+"values": [0.0, 5.88001]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -763,10 +769,10 @@ tracks/1/path = NodePath(".:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 3, 3.5),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 4.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0.98824, 0.989593), Vector2(0.05, 0.05), Vector2(1e-05, 1e-05)]
+"values": [Vector2(0.98824, 0.989593), Vector2(1e-05, 1e-05)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -775,10 +781,10 @@ tracks/2/path = NodePath(".:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.7, 1.1, 1.5, 2, 2.5, 3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 4.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(-6, -1), Vector2(143, -78), Vector2(397, -60), Vector2(475, 60), Vector2(449, 175), Vector2(398, 239), Vector2(336.909, 209.091), Vector2(302, 192)]
+"values": [Vector2(-6, -1), Vector2(314, 159)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -799,11 +805,26 @@ tracks/4/path = NodePath(".:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 3.5),
+"times": PackedFloat32Array(0, 4.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
 }
+tracks/5/type = "audio"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Finish")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("8_66c5p")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/5/use_blend = true
 
 [sub_resource type="Animation" id="Animation_bke52"]
 resource_name = "PickupChestKey"
@@ -844,8 +865,44 @@ tracks/2/keys = {
 "update": 1,
 "values": [false, true, false]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ColorRect:color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.6, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.670588, 0.670588, 0.670588, 0.301961), Color(0.670588, 0.670588, 0.670588, 0.192157), Color(0.670588, 0.670588, 0.670588, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ColorRect/PointLight2D:energy")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1.6, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 0.43, 0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ColorRect/PickupInfo:label_settings:font_color")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 0.12549, 1), Color(1, 1, 0.12549, 0)]
+}
 
-[sub_resource type="Animation" id="Animation_ujdba"]
+[sub_resource type="Animation" id="Animation_txlrc"]
 resource_name = "PickupDoorKey"
 length = 3.0
 tracks/0/type = "value"
@@ -883,6 +940,42 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ColorRect:color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.6, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.670588, 0.670588, 0.670588, 0.301961), Color(0.670588, 0.670588, 0.670588, 0.192157), Color(0.670588, 0.670588, 0.670588, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ColorRect/PointLight2D:energy")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1.6, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 0.43, 0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ColorRect/PickupInfo:label_settings:font_color")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 0.12549, 1), Color(1, 1, 0.12549, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_h1pf5"]
@@ -959,12 +1052,60 @@ tracks/5/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ColorRect:color")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.670588, 0.670588, 0.670588, 0.301961)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("ColorRect/PointLight2D:energy")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("ColorRect/PickupInfo:label_settings:font_color")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 0.12549, 1)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("ColorRect/PickupInfo:label_settings")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("LabelSettings_70kx6")]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_k63c0"]
 _data = {
 "OpenedDoor": SubResource("Animation_l7nim"),
 "PickupChestKey": SubResource("Animation_bke52"),
-"PickupDoorKey": SubResource("Animation_ujdba"),
+"PickupDoorKey": SubResource("Animation_txlrc"),
 "RESET": SubResource("Animation_h1pf5")
 }
 
@@ -986,6 +1127,7 @@ layer_2/name = "SolidObjects"
 layer_2/tile_data = PackedInt32Array(1441792, 65536, 7, 1441793, 131072, 7, 1441794, 131072, 7, 1441795, 131072, 7, 1441796, 131072, 7, 1441797, 131072, 7, 1441798, 131072, 7, 1441799, 131072, 7, 1441800, 131072, 7, 1441801, 131072, 7, 1441802, 131072, 7, 1441803, 131072, 7, 1441804, 131072, 7, 1441805, 131072, 7, 1441806, 131072, 7, 1441807, 131072, 7, 1441808, 131072, 7, 1441809, 131072, 7, 1441810, 131072, 7, 1441811, 131072, 7, 1441812, 131072, 7, 1441813, 131072, 7, 1441814, 131072, 7, 1441815, 131072, 7, 1441816, 131072, 7, 1441817, 131072, 7, 1441818, 131072, 7, 1441819, 131072, 7, 1441820, 131072, 7, 1441821, 131072, 7, 1441822, 131072, 7, 1441823, 131072, 7, 1441824, 131072, 7, 1441825, 131072, 7, 1441826, 131072, 7, 1441827, 131072, 7, 1441828, 131072, 7, 1441829, 131072, 7, 1441830, 131072, 7, 1441831, 131072, 7, 1441832, 196608, 7, 1376256, 65536, 6, 1310720, 65536, 6, 1245184, 65536, 6, 1179648, 65536, 6, 1114112, 65536, 6, 1048576, 65536, 6, 983040, 65536, 6, 917504, 65536, 6, 851968, 65536, 6, 786432, 65536, 6, 720896, 65536, 6, 655360, 65536, 6, 589824, 65536, 6, 524288, 65536, 6, 458752, 65536, 6, 393216, 65536, 6, 327680, 65536, 6, 262144, 65536, 6, 196608, 65536, 6, 131072, 65536, 6, 65536, 65536, 6, 0, 65536, 5, 1, 131072, 5, 2, 131072, 5, 3, 131072, 5, 4, 131072, 5, 5, 131072, 5, 6, 131072, 5, 7, 131072, 5, 8, 131072, 5, 9, 131072, 5, 10, 131072, 5, 11, 131072, 5, 12, 131072, 5, 13, 131072, 5, 14, 131072, 5, 15, 131072, 5, 16, 131072, 5, 17, 131072, 5, 18, 131072, 5, 19, 131072, 5, 20, 131072, 5, 21, 131072, 5, 22, 131072, 5, 23, 131072, 5, 24, 131072, 5, 25, 131072, 5, 26, 131072, 5, 27, 131072, 5, 28, 131072, 5, 29, 131072, 5, 30, 131072, 5, 31, 131072, 5, 32, 131072, 5, 33, 131072, 5, 34, 131072, 5, 35, 131072, 5, 36, 131072, 5, 37, 131072, 5, 38, 131072, 5, 39, 131072, 5, 40, 131072, 5, 65576, 196608, 6, 131112, 196608, 6, 196648, 196608, 6, 262184, 196608, 6, 327720, 196608, 6, 393256, 196608, 6, 458792, 196608, 6, 524328, 196608, 6, 589864, 196608, 6, 655400, 196608, 6, 720936, 196608, 6, 786472, 196608, 6, 852008, 196608, 6, 917544, 196608, 6, 983080, 196608, 6, 1048616, 196608, 6, 1114152, 196608, 6, 1179688, 196608, 6, 1245224, 196608, 6, 1310760, 196608, 6, 1376296, 196608, 6, 1310725, 65536, 1, 1310726, 131072, 1, 1310727, 131072, 1, 1310728, 131072, 1, 1310729, 131072, 1, 1310730, 131072, 1, 1310731, 196608, 1, 1179662, 131072, 1, 1179663, 131072, 1, 1179664, 131072, 1, 1179665, 131072, 1, 1179666, 131072, 1, 1179667, 131072, 1, 1179668, 196608, 1, 1048599, 131072, 1, 1048600, 131072, 1, 1048601, 131072, 1, 1048602, 131072, 1, 1048603, 131072, 1, 1048604, 131072, 1, 1048605, 131072, 1, 917525, 196608, 1, 917524, 131072, 1, 917523, 65536, 1, 786455, 65536, 1, 786456, 131072, 1, 786457, 131072, 1, 786458, 196608, 1, 655381, 196608, 1, 655380, 131072, 1, 655379, 131072, 1, 655378, 131072, 1, 655377, 131072, 1, 524304, 196608, 1, 524303, 131072, 1, 524302, 131072, 1, 524301, 65536, 1, 458765, 196608, 1, 458764, 131072, 1, 458763, 131072, 1, 458762, 131072, 1, 458761, 65536, 1, 524297, 65536, 2, 524310, 65536, 1, 524311, 131072, 1, 524312, 131072, 1, 524313, 589824, 3, 458777, 327680, 1, 393242, 327680, 1, 327707, 327680, 1, 262172, 327680, 1, 1179661, 65536, 1, 1048598, 65536, 1, 262173, 131072, 1, 458778, 589824, 2, 393243, 589824, 3, 655376, 65536, 1, 786433, 131072, 1, 786434, 196608, 1, 589830, 65536, 1, 262174, 131072, 1, 262175, 131072, 1, 262176, 131072, 1, 262177, 131072, 1, 262178, 131072, 1, 262179, 131072, 1, 262180, 131072, 1, 262181, 131072, 1, 262182, 131072, 1, 524314, 524288, 1, 524315, 589824, 3, 524316, 589824, 1, 524317, 524288, 1, 458781, 589824, 2, 458780, 589824, 3, 458779, 589824, 2, 393244, 524288, 1, 327708, 524288, 2, 327709, 589824, 3, 393245, 524288, 3, 327710, 524288, 2, 393246, 589824, 2, 327711, 589824, 3, 458782, 589824, 2, 393247, 524288, 1, 393248, 589824, 3, 327713, 589824, 3, 458783, 524288, 2, 393249, 524288, 3, 327712, 589824, 1, 327714, 589824, 1, 327715, 524288, 1, 327716, 524288, 3, 393252, 589824, 1, 393251, 589824, 2, 393250, 524288, 3, 327717, 524288, 3, 327718, 589824, 1, 393254, 589824, 3, 458790, 524288, 1, 458789, 589824, 3, 524325, 589824, 3, 524326, 589824, 3, 524324, 524288, 1, 524323, 589824, 3, 524322, 524288, 1, 524321, 524288, 3, 524320, 524288, 3, 524319, 524288, 2, 524318, 589824, 3, 458788, 589824, 2, 458787, 524288, 2, 393253, 524288, 1, 458786, 589824, 2, 458785, 524288, 1, 458784, 524288, 2, 1179685, 65536, 1, 1179686, 131072, 1, 1179687, 131072, 1, 1179680, 65536, 1, 1245216, 65536, 2, 1179681, 131072, 1, 1179682, 196608, 1, 1245218, 196608, 2, 65537, 327680, 5, 65538, 393216, 5, 65539, 327680, 5, 65540, 393216, 5, 65541, 327680, 5, 65542, 393216, 5, 65543, 327680, 5, 65544, 393216, 5, 65545, 327680, 5, 65546, 393216, 5, 65547, 327680, 5, 65548, 393216, 5, 65549, 327680, 5, 65550, 393216, 5, 65551, 327680, 5, 65552, 393216, 5, 65553, 327680, 5, 65554, 393216, 5, 65555, 327680, 5, 65556, 393216, 5, 65557, 327680, 5, 65558, 393216, 5, 65559, 327680, 5, 65560, 393216, 5, 65561, 327680, 5, 65562, 393216, 5, 65563, 327680, 5, 65564, 393216, 5, 65565, 327680, 5, 65566, 393216, 5, 65567, 327680, 5, 65568, 393216, 5, 65569, 327680, 5, 65570, 393216, 5, 65571, 327680, 5, 65572, 393216, 5, 65573, 327680, 5, 65574, 393216, 5, 65575, 327680, 5, 262183, 131072, 1, 327719, 524288, 2, 393255, 524288, 1, 458791, 589824, 3, 524327, 589824, 3)
 
 [node name="Player" parent="." instance=ExtResource("3_21drs")]
+z_index = 10
 position = Vector2(39.4641, 339.533)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
@@ -999,7 +1141,6 @@ energy = 7.76
 blend_mode = 1
 
 [node name="EditorLight" type="DirectionalLight2D" parent="."]
-visible = false
 editor_only = true
 
 [node name="LampLight1" type="PointLight2D" parent="."]
@@ -1016,23 +1157,31 @@ texture = SubResource("GradientTexture2D_tr1ql")
 position = Vector2(24.2856, 182.903)
 
 [node name="Door" parent="." instance=ExtResource("5_kybu7")]
-position = Vector2(632.438, 46.4837)
+position = Vector2(634.461, 47.4943)
 
 [node name="Key" parent="." instance=ExtResource("6_h3p7w")]
 position = Vector2(632.438, 278.902)
+collision_layer = 8
+collision_mask = 9
+
+[node name="Box" parent="." instance=ExtResource("9_5we3t")]
+position = Vector2(223.63, 341.555)
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_vebhn")
 autoplay = true
+
+[node name="Finish" type="AudioStreamPlayer" parent="."]
+volume_db = 18.756
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
 light_mask = 2
 visibility_layer = 2
 offset_left = 274.225
-offset_top = 227.366
+offset_top = 277.892
 offset_right = 366.225
-offset_bottom = 246.366
+offset_bottom = 296.892
 color = Color(0.670588, 0.670588, 0.670588, 0.301961)
 
 [node name="PickupInfo" type="Label" parent="ColorRect"]
@@ -1041,7 +1190,7 @@ offset_left = 1.57043
 offset_top = 3.45023
 offset_right = 87.5704
 offset_bottom = 19.4502
-text = "DOOR KEY"
+text = "CHEST KEY"
 label_settings = SubResource("LabelSettings_70kx6")
 
 [node name="PointLight2D" type="PointLight2D" parent="ColorRect"]
@@ -1050,12 +1199,17 @@ scale = Vector2(1.43285, 0.284208)
 texture = SubResource("GradientTexture2D_cf00r")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+process_mode = 3
 libraries = {
 "": SubResource("AnimationLibrary_k63c0")
 }
 
 [node name="Timer" type="Timer" parent="."]
+process_mode = 3
+one_shot = true
 
 [connection signal="body_entered" from="Chest" to="." method="OnBodyEnteredChest"]
 [connection signal="body_entered" from="Door" to="." method="OnBodyEnteredDoor"]
 [connection signal="body_entered" from="Key" to="." method="OnBodyEnteredChestKey"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="OnAnimationFinished"]
+[connection signal="timeout" from="Timer" to="." method="OnTimerFinished"]

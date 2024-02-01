@@ -2,12 +2,13 @@
 
 [ext_resource type="Texture2D" uid="uid://dam6i2uwxuokp" path="res://Sprites/Dungeon Tile Set.png" id="1_0fa3y"]
 [ext_resource type="Script" path="res://Scripts/Components/Door.cs" id="1_f4xon"]
-[ext_resource type="AudioStream" uid="uid://c3cv522bngb8j" path="res://Sounds/pickup3.wav" id="3_3kicn"]
+[ext_resource type="AudioStream" uid="uid://b5moy3dtv3r31" path="res://Sounds/openDoor.wav" id="3_4dmqd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hn060"]
 size = Vector2(17, 31)
 
 [node name="Doors" type="Area2D"]
+process_mode = 3
 script = ExtResource("1_f4xon")
 
 [node name="Closed" type="Sprite2D" parent="."]
@@ -26,4 +27,6 @@ position = Vector2(-0.5, 0.5)
 shape = SubResource("RectangleShape2D_hn060")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_3kicn")
+stream = ExtResource("3_4dmqd")
+
+[connection signal="finished" from="AudioStreamPlayer" to="." method="OnDoorOpened"]

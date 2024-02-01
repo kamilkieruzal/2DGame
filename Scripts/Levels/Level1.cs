@@ -5,6 +5,7 @@ public partial class Level1 : Node2D
 {
     private Timer timer;
     private AnimationPlayer animationPlayer;
+    private AudioStreamPlayer backgroundMusicPlayer;
     private ColorRect textLabel;
     private Chest chest;
     private Door door;
@@ -18,6 +19,7 @@ public partial class Level1 : Node2D
         Input.MouseMode = Input.MouseModeEnum.Captured;
         timer = GetNode<Timer>("Timer");
         animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        backgroundMusicPlayer = GetNode<AudioStreamPlayer>("Music");
         textLabel = GetNode<ColorRect>("ColorRect");
         chest = GetNode<Chest>("Chest");
         door = GetNode<Door>("Door");
@@ -34,7 +36,7 @@ public partial class Level1 : Node2D
 
     private void OnBodyEnteredChestKey(Node2D body)
     {
-        if (body is Player)
+        if (body is Player player && !player.HasChestKey)
         {
             key.Pickup();
             player.PickupChestKey();
@@ -44,7 +46,7 @@ public partial class Level1 : Node2D
 
     private void OnBodyEnteredChest(Node2D body)
     {
-        if (body is Player player && player.HasChestKey)
+        if (body is Player player && player.HasChestKey && !player.HasDoorKey)
         {
             chest.Open();
             player.PickupDoorKey();
@@ -57,9 +59,21 @@ public partial class Level1 : Node2D
         if (body is Player player && player.HasDoorKey && !finishedLevel)
         {
             finishedLevel = true;
+            GetTree().Paused = true;
+            timer.Start();
+            backgroundMusicPlayer.Stop();
             door.Open();
-            player.PickupDoorKey();
-            animationPlayer.Play("OpenedDoor");
         }
+    }
+
+    private void OnTimerFinished()
+    {
+        animationPlayer.Play("OpenedDoor");
+    }
+
+    private void OnAnimationFinished(string animationName)
+    {
+        if (animationName == "OpenedDoor")
+            GetTree().Paused = false;
     }
 }
