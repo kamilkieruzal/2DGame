@@ -1,9 +1,10 @@
 using Godot;
 
 //Write 1 script for all levels and create resources to just modify TileMap of next levels
-public partial class Level1 : Node2D
+public partial class Level : Node2D
 {
-    private Timer timer;
+    [Export]
+    public Timer timer;
     private AnimationPlayer animationPlayer;
     private AudioStreamPlayer backgroundMusicPlayer;
     private ColorRect textLabel;
@@ -17,14 +18,14 @@ public partial class Level1 : Node2D
     public override void _Ready()
     {
         Input.MouseMode = Input.MouseModeEnum.Captured;
-        timer = GetNode<Timer>("Timer");
-        animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-        backgroundMusicPlayer = GetNode<AudioStreamPlayer>("Music");
-        textLabel = GetNode<ColorRect>("ColorRect");
-        chest = GetNode<Chest>("Chest");
-        door = GetNode<Door>("Door");
-        key = GetNode<Key>("Key");
-        player = GetNode<Player>("Player");
+        timer = GetNode<Timer>("MainNode/Timer");
+        animationPlayer = GetNode<AnimationPlayer>("MainNode/AnimationPlayer");
+        backgroundMusicPlayer = GetNode<AudioStreamPlayer>("MainNode/Music");
+        textLabel = GetNode<ColorRect>("MainNode/ColorRect");
+        chest = GetNode<Chest>("MainNode/Chest");
+        door = GetNode<Door>("MainNode/Door");
+        key = GetNode<Key>("MainNode/Key");
+        player = GetNode<Player>("MainNode/Player");
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.

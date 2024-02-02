@@ -2,6 +2,7 @@ using Godot;
 
 public partial class Player : CharacterBody2D
 {
+    private const double PushSpeed = 0.1;
     private float gravity = 1500;
     private float runSpeed = 100;
     private float jumpSpeed = -300;
@@ -11,6 +12,7 @@ public partial class Player : CharacterBody2D
     private Sprite2D sprite;
     private AudioStreamPlayer walkAudio;
     private AudioStreamPlayer jumpAudio;
+    private double deltaSum;
 
     public bool HasChestKey { get; private set; }
     public bool HasDoorKey { get; private set; }
@@ -54,12 +56,18 @@ public partial class Player : CharacterBody2D
 
         MoveAndSlide();
 
-        for (var i = 0; i < GetSlideCollisionCount(); i++)
+        deltaSum += delta;
+
+        if(deltaSum > PushSpeed)
         {
-            var collision = GetSlideCollision(i);
-            if (collision.GetCollider() is RigidBody2D rigidBody2D)
+            deltaSum = 0;
+            for (var i = 0; i < GetSlideCollisionCount(); i++)  
             {
-                rigidBody2D.ApplyCentralImpulse(new Vector2(-collision.GetNormal().X * 100f, 0));
+                var collision = GetSlideCollision(i);
+                if (collision.GetCollider() is RigidBody2D rigidBody2D)
+                {
+                    rigidBody2D.ApplyCentralImpulse(new Vector2(-collision.GetNormal().X * 100f, 0));
+                }
             }
         }
     }

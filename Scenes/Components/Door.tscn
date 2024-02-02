@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8u6pkos2bvqq"]
+[gd_scene load_steps=7 format=3 uid="uid://b8u6pkos2bvqq"]
 
 [ext_resource type="Texture2D" uid="uid://dam6i2uwxuokp" path="res://Sprites/Dungeon Tile Set.png" id="1_0fa3y"]
 [ext_resource type="Script" path="res://Scripts/Components/Door.cs" id="1_f4xon"]
@@ -6,6 +6,18 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hn060"]
 size = Vector2(17, 31)
+
+[sub_resource type="Gradient" id="Gradient_vyf8a"]
+offsets = PackedFloat32Array(0.0508475, 0.40678, 0.898305, 0.966102)
+colors = PackedColorArray(1, 1, 1, 1, 0.620339, 0.620339, 0.620339, 1, 0.0960452, 0.0960452, 0.0960452, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_030xd"]
+gradient = SubResource("Gradient_vyf8a")
+width = 50
+height = 50
+fill = 1
+fill_from = Vector2(0.508547, 0.487179)
+fill_to = Vector2(0.162393, 0.15812)
 
 [node name="Doors" type="Area2D"]
 process_mode = 3
@@ -28,5 +40,10 @@ shape = SubResource("RectangleShape2D_hn060")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_4dmqd")
+
+[node name="LampLight" type="PointLight2D" parent="."]
+position = Vector2(0, 2)
+color = Color(0.588235, 0.588235, 1, 1)
+texture = SubResource("GradientTexture2D_030xd")
 
 [connection signal="finished" from="AudioStreamPlayer" to="." method="OnDoorOpened"]

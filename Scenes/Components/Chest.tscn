@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://b6auqgjrwxvpx"]
+[gd_scene load_steps=7 format=3 uid="uid://b6auqgjrwxvpx"]
 
 [ext_resource type="Texture2D" uid="uid://dam6i2uwxuokp" path="res://Sprites/Dungeon Tile Set.png" id="1_6oukn"]
 [ext_resource type="Script" path="res://Scripts/Components/Chest.cs" id="1_7l7yo"]
@@ -6,6 +6,18 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2stf2"]
 size = Vector2(16, 17)
+
+[sub_resource type="Gradient" id="Gradient_jk1a7"]
+offsets = PackedFloat32Array(0.0508475, 0.40678, 0.898305, 0.966102)
+colors = PackedColorArray(1, 1, 1, 1, 0.620339, 0.620339, 0.620339, 1, 0.0960452, 0.0960452, 0.0960452, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jln8d"]
+gradient = SubResource("Gradient_jk1a7")
+width = 50
+height = 50
+fill = 1
+fill_from = Vector2(0.508547, 0.487179)
+fill_to = Vector2(0.162393, 0.15812)
 
 [node name="Chest" type="Area2D"]
 script = ExtResource("1_7l7yo")
@@ -27,3 +39,8 @@ shape = SubResource("RectangleShape2D_2stf2")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_rdbkx")
+
+[node name="LampLight" type="PointLight2D" parent="."]
+position = Vector2(1, 1)
+color = Color(0.588235, 0.588235, 1, 1)
+texture = SubResource("GradientTexture2D_jln8d")
