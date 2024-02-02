@@ -53,6 +53,15 @@ public partial class Player : CharacterBody2D
         GetInput();
 
         MoveAndSlide();
+
+        for (var i = 0; i < GetSlideCollisionCount(); i++)
+        {
+            var collision = GetSlideCollision(i);
+            if (collision.GetCollider() is RigidBody2D rigidBody2D)
+            {
+                rigidBody2D.ApplyCentralImpulse(new Vector2(-collision.GetNormal().X * 100f, 0));
+            }
+        }
     }
 
     private void GetInput()
