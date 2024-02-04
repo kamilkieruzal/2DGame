@@ -1,4 +1,5 @@
 using Godot;
+using System;
 
 public partial class Player : CharacterBody2D
 {
@@ -14,12 +15,23 @@ public partial class Player : CharacterBody2D
     private AudioStreamPlayer jumpAudio;
     private double deltaSum;
 
+    private float jumpHeight = 30;
+    private float jumpTimeToPeak = 0.2f;
+    private float jumpTimeToDescent = 0.15f;
+    private float jumpVelocity;
+    private float jumpGravity;
+    private float fallGravity;
+
     public bool HasChestKey { get; private set; }
     public bool HasDoorKey { get; private set; }
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        jumpVelocity = -(2f * jumpHeight) / jumpTimeToPeak;
+        jumpGravity = (2f * jumpHeight) / (jumpTimeToPeak * jumpTimeToPeak);
+        fallGravity = (2f * jumpHeight) / (jumpTimeToDescent * jumpTimeToDescent);
+
         sprite = GetNode<Sprite2D>("Sprite");
         walkAudio = GetNode<AudioStreamPlayer>("Walk");
         jumpAudio = GetNode<AudioStreamPlayer>("Jump");
@@ -49,10 +61,10 @@ public partial class Player : CharacterBody2D
     public override void _PhysicsProcess(double delta)
     {
         var velocity = Velocity;
-        velocity.Y += gravity * (float)delta;
+        velocity.Y += GetGravity() * (float)delta;
 
         Velocity = velocity;
-        GetInput();
+        GetInput(delta);
 
         MoveAndSlide();
 
@@ -72,7 +84,7 @@ public partial class Player : CharacterBody2D
         }
     }
 
-    private void GetInput()
+    private void GetInput(double delta)
     {
         var velocity = Velocity;
         velocity.X = 0;
@@ -83,7 +95,7 @@ public partial class Player : CharacterBody2D
 
         if (IsOnFloor() && jump)
         {
-            velocity.Y = jumpSpeed;
+            velocity.Y = jumpVelocity;
             jumpAudio.Play(0.15f);
         }
 
@@ -98,6 +110,11 @@ public partial class Player : CharacterBody2D
             velocity.X -= runSpeed;
 
         Velocity = velocity;
+    }
+
+    private float GetGravity()
+    {
+        return Velocity.Y < 0.0 ? jumpGravity : fallGravity;
     }
 
     public void PickupChestKey()
