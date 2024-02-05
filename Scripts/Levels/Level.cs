@@ -33,6 +33,9 @@ public partial class Level : Node2D
     {
         if (Input.IsActionJustPressed("Exit"))
             GetTree().Quit();
+
+        if (Input.IsActionJustPressed("RestartLevel"))
+            GetTree().ReloadCurrentScene();
     }
 
     private void OnBodyEnteredChestKey(Node2D body)
