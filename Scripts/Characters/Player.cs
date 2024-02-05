@@ -3,7 +3,7 @@ using System;
 
 public partial class Player : CharacterBody2D
 {
-    private const double PushSpeed = 0.1;
+    private const double PushSpeed = 0.15;
     private float gravity = 1500;
     private float runSpeed = 100;
     private float jumpSpeed = -300;
@@ -77,7 +77,7 @@ public partial class Player : CharacterBody2D
             {
                 var collision = GetSlideCollision(i);
                 if (collision.GetCollider() is RigidBody2D rigidBody2D)
-                    rigidBody2D.ApplyCentralImpulse(new Vector2(-collision.GetNormal().X * 100f, 0));
+                    rigidBody2D.ApplyCentralImpulse(new Vector2(-collision.GetNormal().X * 110f, 0));
             }
         }
     }

@@ -13,6 +13,7 @@ public partial class Level : Node2D
     private Key key;
     private Player player;
     private bool finishedLevel;
+    private LevelManager levelManager;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -26,6 +27,7 @@ public partial class Level : Node2D
         door = GetNode<Door>("MainNode/Door");
         key = GetNode<Key>("MainNode/Key");
         player = GetNode<Player>("MainNode/Player");
+        levelManager = new LevelManager();
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -67,6 +69,8 @@ public partial class Level : Node2D
             timer.Start();
             backgroundMusicPlayer.Stop();
             door.Open();
+            LevelManager.CurrentLevel++;
+            levelManager.SaveGame(LevelManager.CurrentLevel);
         }
     }
 

@@ -3,14 +3,13 @@ using System.Linq;
 
 public partial class Menu : Control
 {
+    LevelManager levelManager;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-    }
-
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void _Process(double delta)
-    {
+        levelManager = new LevelManager();
+        levelManager.LoadGame();
     }
 
     private void OnExit()
@@ -20,12 +19,12 @@ public partial class Menu : Control
 
     private void OnStart()
     {
+        LevelManager.CurrentLevel = 0;
         GetTree().ChangeSceneToPacked(LevelManager.Levels.First().LevelScene);
     }
 
     private void OnContinue()
     {
-        var lastLevel = 2;
-        GetTree().ChangeSceneToPacked(LevelManager.Levels[lastLevel - 1].LevelScene);
+        GetTree().ChangeSceneToPacked(LevelManager.Levels[LevelManager.CurrentLevel].LevelScene);
     }
 }
