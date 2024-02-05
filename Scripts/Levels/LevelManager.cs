@@ -15,13 +15,5 @@ public static class LevelManager
             LevelNumber = 2,
             LevelScene = GD.Load<PackedScene>("res://Scenes/Levels/Level2.tscn")
         },
-        new LevelInfo
-        {
-            LevelNumber = 3,
-            LevelScene = GD.Load<PackedScene>("res://Scenes/Levels/Level3.tscn")
-        },
     };
-
-
-
 }

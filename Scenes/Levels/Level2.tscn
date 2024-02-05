@@ -1358,7 +1358,7 @@ shape = SubResource("RectangleShape2D_euybb")
 
 [node name="Player" parent="MainNode" instance=ExtResource("4_jj4ld")]
 z_index = 10
-position = Vector2(39.4641, 342.565)
+position = Vector2(378.451, 341.555)
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="MainNode"]
 color = Color(0.121569, 0.121569, 0.121569, 1)
