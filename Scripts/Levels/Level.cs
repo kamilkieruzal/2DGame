@@ -82,6 +82,9 @@ public partial class Level : Node2D
     private void OnAnimationFinished(string animationName)
     {
         if (animationName == "OpenedDoor")
+        {
             GetTree().Paused = false;
+            GetTree().ChangeSceneToPacked(LevelManager.Levels[LevelManager.CurrentLevel].LevelScene);
+        }
     }
 }
