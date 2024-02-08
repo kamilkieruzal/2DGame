@@ -168,13 +168,17 @@ texture = SubResource("GradientTexture2D_lvelu")
 
 [node name="Jump" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_3fefc")
+volume_db = -10.0
 
 [node name="Walk" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_ia132")
-volume_db = -10.196
+volume_db = -14.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.4, 1.1)
 scale = Vector2(1.28, 0.72)
 shape = SubResource("RectangleShape2D_r1cby")
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(19, 0)

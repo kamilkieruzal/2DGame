@@ -17,6 +17,11 @@ public partial class LevelManager : Node2D
             LevelNumber = 1,
             LevelScene = GD.Load<PackedScene>("res://Scenes/Levels/Level2.tscn")
         },
+        new LevelInfo
+        {
+            LevelNumber = 2,
+            LevelScene = GD.Load<PackedScene>("res://Scenes/Levels/Level3.tscn")
+        },
     };
 
     public void SaveGame(int lastLevel)

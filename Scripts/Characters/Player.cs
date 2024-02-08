@@ -3,7 +3,7 @@ using System;
 
 public partial class Player : CharacterBody2D
 {
-    private const double PushSpeed = 0.15;
+    private const double PushSpeed = 0.13;
     private float gravity = 1500;
     private float runSpeed = 100;
     private float jumpSpeed = -300;
@@ -56,6 +56,8 @@ public partial class Player : CharacterBody2D
         {
             animationPlayer.Play("Idle");
         }
+
+        GD.Print(GetNode<RayCast2D>("RayCast2D").GetCollider());
     }
 
     public override void _PhysicsProcess(double delta)
