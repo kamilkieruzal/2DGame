@@ -56,8 +56,6 @@ public partial class Player : CharacterBody2D
         {
             animationPlayer.Play("Idle");
         }
-
-        GD.Print(GetNode<RayCast2D>("RayCast2D").GetCollider());
     }
 
     public override void _PhysicsProcess(double delta)
