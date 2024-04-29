@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dam6i2uwxuokp" path="res://Sprites/Dungeon Tile Set.png" id="1_0g3k1"]
 [ext_resource type="Script" path="res://Scripts/Levels/Menu.cs" id="1_uax0c"]
+[ext_resource type="FontFile" uid="uid://mouxgw1f6fn7" path="res://Fonts/Sedan-Italic.ttf" id="3_rvqgn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kmio2"]
 texture = ExtResource("1_0g3k1")
@@ -142,9 +143,6 @@ texture = ExtResource("1_0g3k1")
 [sub_resource type="TileSet" id="TileSet_41aqd"]
 sources/0 = SubResource("TileSetAtlasSource_kmio2")
 
-[sub_resource type="SystemFont" id="SystemFont_74y3p"]
-font_names = PackedStringArray("Jokerman")
-
 [node name="Menu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -177,12 +175,12 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-theme_override_fonts/font = SubResource("SystemFont_74y3p")
+theme_override_fonts/font = ExtResource("3_rvqgn")
 text = "START"
 
 [node name="Button2" type="Button" parent="GridContainer"]
 layout_mode = 2
-theme_override_fonts/font = SubResource("SystemFont_74y3p")
+theme_override_fonts/font = ExtResource("3_rvqgn")
 text = "CONTINUE"
 
 [node name="Control" type="Control" parent="GridContainer"]
@@ -191,7 +189,7 @@ size_flags_vertical = 3
 
 [node name="Button3" type="Button" parent="GridContainer"]
 layout_mode = 2
-theme_override_fonts/font = SubResource("SystemFont_74y3p")
+theme_override_fonts/font = ExtResource("3_rvqgn")
 text = "EXIT"
 
 [connection signal="pressed" from="GridContainer/Button" to="." method="OnStart"]
