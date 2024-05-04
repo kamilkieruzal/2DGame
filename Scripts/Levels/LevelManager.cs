@@ -1,5 +1,6 @@
 using Godot;
 using System.Collections.Generic;
+using System.Linq;
 
 public partial class LevelManager : Node2D
 {
@@ -22,10 +23,18 @@ public partial class LevelManager : Node2D
             LevelNumber = 2,
             LevelScene = GD.Load<PackedScene>("res://Scenes/Levels/Level3.tscn")
         },
+        new LevelInfo
+        {
+            LevelNumber = 3,
+            LevelScene = GD.Load<PackedScene>("res://Scenes/Levels/EndScreen.tscn")
+        },
     };
 
     public void SaveGame(int lastLevel)
     {
+        if (lastLevel == Levels.Last().LevelNumber)
+            lastLevel = 0;
+
         using var saveGame = FileAccess.Open("user://savegame.save", FileAccess.ModeFlags.Write);
 
         saveGame.StoreLine("{ \"lastLevel\": " + lastLevel + "}");
