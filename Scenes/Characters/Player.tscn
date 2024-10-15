@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c7rhs84ocoq5s"]
+[gd_scene load_steps=13 format=3 uid="uid://bfvss5us6wvrj"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/Player.cs" id="1_00ey8"]
 [ext_resource type="Texture2D" uid="uid://pxc5sepb5c2s" path="res://Sprites/Monster/Idle/Spr_Idle.png" id="1_lr7vs"]
