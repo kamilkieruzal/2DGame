@@ -10,6 +10,7 @@ public partial class Menu : Control
     {
         levelManager = new LevelManager();
         levelManager.LoadGame();
+        Input.MouseMode = Input.MouseModeEnum.Visible;
     }
 
     private void OnExit()
